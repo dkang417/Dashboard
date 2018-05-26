@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Information</title>
+</head>
+<body>
+	<div id="wrapper">
+		<div class="header">
+			<p>Test App</p>
+			<p><a href="/dashboard">Dashboard</a></p>
+			<p><a href="/users/show/{{user.id}}">Profile</a></p>
+			<p><a href="/logout">Log Off</a></p>
+		</div>
+		<div class="top">
+			<h1>{{ user.first_name}} {{ user.last_name }}</h1>
+			<p> Registered at: {{ user.created_at }}</p>
+			<p>User ID: #{{ user.id }} </p>
+			<p>Email address: {{ user.email }}</p>
+			<p>Description: </p>
+		</div>
+		
+	</div>
+
+</body>
+</html>

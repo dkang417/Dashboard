@@ -7,14 +7,14 @@ urlpatterns = [
 	url(r'^process$', views.process),
     url(r'^register$', views.register),
     url(r'^dashboard$', views.dashboard),
-    url(r'^logout$', views.logout)
-    # url(r'^main$', views.index),
-    # url(r'^register$', views.register),
-    # url(r'^login$', views.login),
-    # url(r'^travels$', views.travels),
-    # url(r'^logout$', views.logout),
-    # url(r'^travels/add$', views.add),
-    # url(r'^addtrip$', views.addtrip),
-    # url(r'^join/(?P<id>\d+)$', views.join),
-    # url(r'^travels/destination/(?P<id>\d+)$', views.showtrip)
+    url(r'^logout$', views.logout),
+    url(r'^users/new$', views.adduser),
+    url(r'^createuser$', views.createuser),
+    url(r'^users/edit/(?P<id>\d+)$', views.editid),
+    url(r'^updateid/(?P<id>\d+)$', views.updateid),
+    url(r'^updatepassword/(?P<id>\d+)$', views.updatepassword),
+    url(r'^deleteuser/(?P<id>\d+)$', views.deleteuser), 
+    url(r'^removeuser/(?P<id>\d+)$', views.removeuser),
+    url(r'^users/show/(?P<id>\d+)$', views.userinfo),
+  
 ]

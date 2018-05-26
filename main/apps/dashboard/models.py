@@ -8,6 +8,8 @@ import bcrypt
 
 class Description(models.Model):
     description = models.TextField()
+    def __repr__(self):
+        return "<Description object: {}>".format(self.description)
 
 class UserManager(models.Manager):
     def validate(self, request):
@@ -40,7 +42,7 @@ class UserManager(models.Manager):
             	hashed_pw = bcrypt.hashpw(password.encode(),bcrypt.gensalt())
              
                 u = User.objects.all()
-
+                #first user becomes userlevel 9 all else 1
                 if len(u) < 1:
                     user_level = 9
                 else:

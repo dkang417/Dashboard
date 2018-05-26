@@ -4,10 +4,51 @@
 	<title>dashboard</title>
 </head>
 <body>
-<h1>Welcome Home {{user.first_name}}</h1>
-<p>{{user.id}}</p>
-<p>{{user.created_at}}</p>
-<p>{{user.user_level}}</p>
-<p><a href="/logout">Logout</a></p>
+
+	<div id="wrapper">
+		<div>
+			{% if messages %}
+				<ul class="messages">
+				    {% for message in messages %}
+				    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				    {% endfor %}
+				</ul>
+			{% endif %}
+		</div>
+		<div class="header">
+			<p>Test App</p>
+			<p><a href="/dashboard">Dashboard</a></p>
+			<p><a href="/">Profile</a></p>
+			<p><a href="/logout">Log Off</a></p>
+		</div>
+		
+	</div>
+	<div id="main">
+		<h2>Manage Users</h2>
+		<p><a href="users/new">Add New</a></p>		
+	</div>
+
+
+	<table border=1 style="width:50%">
+		<tr>
+	    	<th>Name</th>
+	    	<th>Email</th> 
+	    	<th>Created_at</th>
+	    	<th>User_level</th>
+	    	<th>Actions</th>
+	  	</tr>
+
+	  	<tr>
+	  		{% for person in users %}
+				<td> <a href="users/show/{{person.id}}">{{person.first_name}} {{person.last_name}}</a> </td>
+				<td>{{ person.email}} </td>
+				<td>{{ person.created_at  }} </td>
+				<td>{{ person.user_level }} </td>
+				<td> <a href="users/edit/{{person.id}}">edit</a>  <a href="deleteuser/{{person.id}}">remove</a></td>
+
+		</tr>	
+		{% endfor %}
+	</table>
+
 </body>
 </html>
