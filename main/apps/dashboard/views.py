@@ -114,7 +114,24 @@ def removeuser(request, id):
 
 def userinfo(request, id): 
 	user = User.objects.get(id=id)
+	messages= Message.objects.filter(message_for=id)
+	comments = Comment.objects.all()
 	context = {
-		'user': user
+		'user': user,
+		'messages': messages,
+		'comments' : comments
 	}
 	return render(request, 'dashboard/userinfo.html', context)
+
+def makemessage(request, id):
+	user = User.objects.get(id=id)
+	message_creator = User.objects.get(id=request.session['id'])
+	message_content = request.POST["add_message"]
+	Message.objects.create(message_content=message_content, message_creator= message_creator, message_for = user)
+	return redirect('/dashboard')
+def makecomment(request,id):
+	user = User.objects.get(id=id)
+	comment_creator = User.objects.get(id=request.session['id'])
+	comment_content = request.POST["add_comment"]
+	Comment.objects.create(comment_content= comment_content, comment_creator = comment_creator, commented_on = user)
+

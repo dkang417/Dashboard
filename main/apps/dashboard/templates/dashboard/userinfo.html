@@ -18,6 +18,37 @@
 			<p>Email address: {{ user.email }}</p>
 			<p>Description: </p>
 		</div>
+		<div class="messages">
+
+			<form action="/makemessage/{{user.id}}" method="POST"> 
+				{% csrf_token %}
+			
+	            <p>Leave a message for {{user.first_name}}:</p>
+	            
+	            <textarea name="add_message">
+	            </textarea> <br>
+	            <input type="submit" value="Post">
+	        </form>
+
+	        {% for message in messages %}
+
+	        
+	        <h3>{{ message.message_creator.first_name }} {{ message.last_name }} wrote:   {{message.created_at }}</h3>
+			<p>{{message.message_content }}</p>
+
+	        	{% for comment in comments %} 
+            	{% if message.id == comment.id %}
+                <ul>
+                	<h3>{{ comment.first_name }} {{ comment.last_name }} - {{comment.created_at }}</h3>
+                    <p>{{ comment.comment }}</p>
+                </ul>
+            	{% endif %}
+        		{% endfor %}
+
+
+	        {% endfor %}
+			
+			</div>
 		
 	</div>
 
