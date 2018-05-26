@@ -5,6 +5,8 @@
 </head>
 <body>
 	<div id="wrapper">
+		
+
 		<div class="header">
 			<p>Test App</p>
 			<p><a href="/dashboard">Dashboard</a></p>
@@ -16,7 +18,7 @@
 			<p> Registered at: {{ user.created_at }}</p>
 			<p>User ID: #{{ user.id }} </p>
 			<p>Email address: {{ user.email }}</p>
-			<p>Description: </p>
+			<p>Description: {{user.description.description}}</p>
 		</div>
 		<div class="messages">
 

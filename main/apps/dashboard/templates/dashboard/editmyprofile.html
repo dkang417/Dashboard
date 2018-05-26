@@ -17,7 +17,7 @@
 		<h1>Edit my profile</h1>
 
 		<h3>Edit information</h3>
-		<form action="" method="POST">
+		<form action="/updatemyprofile" method="POST">
 			{% csrf_token %}
 				<label for ="email">Email:</label> 
 				<input type="text" name="email" value="{{user.email}}"> <br>
@@ -42,7 +42,7 @@
 				
 		</form>
 		<h3>Change password</h3>
-		<form action="/" method="POST">
+		<form action="/updatemypassword" method="POST">
 			{% csrf_token %}
 			<label for ="password">Password:</label> 
 				<input type="password" name="password"> <br>
@@ -51,9 +51,19 @@
 				<input type="password" name="confirm_password"> <br>
 				<input type="submit" value="Update Password">
 		</form>
+		
+
+		<div id="description">
+			<h3>Edit Description</h3>
+			<p>descript here</p>
+			<form action="/editdescription" method="POST">
+			{% csrf_token %}
+			<label for ="description">desciption:</label> 
+				
+				<input type="textarea" name="description"> <br>
+				<input type="submit" value="Update Description">
 		</form>
-
-
+		</div>
 	</div>
 
 </body>

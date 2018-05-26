@@ -128,7 +128,7 @@ def makemessage(request, id):
 	message_creator = User.objects.get(id=request.session['id'])
 	message_content = request.POST["add_message"]
 	Message.objects.create(message_content=message_content, message_creator= message_creator, message_for = user)
-	return redirect('/dashboard')
+	return redirect('/users/show/{}'.format(id))
 
 def makecomment(request,message_id):
 	message = Message.objects.get(id=message_id)
@@ -137,10 +137,48 @@ def makecomment(request,message_id):
 	comment_content = request.POST["add_comment"]
 	Comment.objects.create(comment_creator = comment_creator, comment_content= comment_content, commented_on = message)
 	return redirect('/dashboard')
+
 def editprofile(request):
 	user = User.objects.get(id=request.session['id'])
 	context = {
 		'user':user
 	}
 	return render(request, 'dashboard/editmyprofile.html', context)
+def updatemyprofile(request):
+	user = User.objects.get(id=request.session['id'])
+	first_name = request.POST["first_name"]
+	last_name = request.POST["last_name"]
+	email = request.POST["email"]
+	user_level = request.POST["user_level"]
+
+	user.first_name = first_name
+	user.last_name = last_name
+	user.email = email 
+	user.user_level = user_level
+	user.save()
+	messages.success(request,"your profile successfully updated")
+	
+	return redirect('/dashboard')
+
+def updatemypassword(request):
+	user = User.objects.get(id=request.session['id'])
+	password = request.POST["password"]
+	confirm = request.POST["confirm_password"]
+	hashed_pw = bcrypt.hashpw(password.encode(),bcrypt.gensalt())
+	if request.POST["password"] != request.POST["confirm_password"]:
+		messages.error(request,"passwords do not match")
+
+	user.password = hashed_pw
+	user.save()
+	messages.success(request," password successfully updated")
+	return redirect('/dashboard')
+def editdescription(request):
+	user = User.objects.get(id=request.session['id'])
+	description= request.POST["description"]
+	user.description.description = description
+	user.description.save()
+	messages.success(request,"description successfully updated")
+	return redirect('/dashboard')
+
+
 
