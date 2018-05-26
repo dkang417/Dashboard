@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit User</title>
+</head>
+<body>
+	<div id="wrapper">
+
+		<div class="header">
+			<p>Test App</p>
+			<p><a href="/dashboard">Dashboard</a></p>
+			<p><a href="/">Profile</a></p>
+			<p><a href="/logout">Log Off</a></p>
+		</div>
+
+		<h1>Edit my profile</h1>
+
+		<h3>Edit information</h3>
+		<form action="" method="POST">
+			{% csrf_token %}
+				<label for ="email">Email:</label> 
+				<input type="text" name="email" value="{{user.email}}"> <br>
+
+				<label for ="first_name">First Name:</label> 
+				<input type="text" name="first_name" value="{{user.first_name}}"><br>
+				
+				<label for ="last_name">Last Name:</label> 
+				<input type="text" name="last_name" value="{{user.last_name}}"><br>
+
+				User Level: <br>
+				
+				<select name="user_level">
+					<option value=1>normal</option>
+					<option value=9>admin</option>
+				</select>
+				<br>
+				<input type="submit" value="save">
+				<br>
+				
+				
+				
+		</form>
+		<h3>Change password</h3>
+		<form action="/" method="POST">
+			{% csrf_token %}
+			<label for ="password">Password:</label> 
+				<input type="password" name="password"> <br>
+				
+				<label for ="confirm_password">Confirm Password:</label>  
+				<input type="password" name="confirm_password"> <br>
+				<input type="submit" value="Update Password">
+		</form>
+		</form>
+
+
+	</div>
+
+</body>
+</html>

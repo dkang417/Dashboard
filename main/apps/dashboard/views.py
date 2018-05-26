@@ -129,9 +129,18 @@ def makemessage(request, id):
 	message_content = request.POST["add_message"]
 	Message.objects.create(message_content=message_content, message_creator= message_creator, message_for = user)
 	return redirect('/dashboard')
-def makecomment(request,id):
-	user = User.objects.get(id=id)
+
+def makecomment(request,message_id):
+	message = Message.objects.get(id=message_id)
+	message_id = message_id
 	comment_creator = User.objects.get(id=request.session['id'])
 	comment_content = request.POST["add_comment"]
-	Comment.objects.create(comment_content= comment_content, comment_creator = comment_creator, commented_on = user)
+	Comment.objects.create(comment_creator = comment_creator, comment_content= comment_content, commented_on = message)
+	return redirect('/dashboard')
+def editprofile(request):
+	user = User.objects.get(id=request.session['id'])
+	context = {
+		'user':user
+	}
+	return render(request, 'dashboard/editmyprofile.html', context)
 

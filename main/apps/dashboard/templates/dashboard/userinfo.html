@@ -8,7 +8,7 @@
 		<div class="header">
 			<p>Test App</p>
 			<p><a href="/dashboard">Dashboard</a></p>
-			<p><a href="/users/show/{{user.id}}">Profile</a></p>
+			<p><a href="/users/edit">Profile</a></p>
 			<p><a href="/logout">Log Off</a></p>
 		</div>
 		<div class="top">
@@ -32,18 +32,30 @@
 
 	        {% for message in messages %}
 
-	        
-	        <h3>{{ message.message_creator.first_name }} {{ message.last_name }} wrote:   {{message.created_at }}</h3>
+	   
+	        <h3>{{ message.message_creator.first_name }} {{ message.message_creator.last_name }} wrote:   {{message.created_at }}</h3>
 			<p>{{message.message_content }}</p>
 
 	        	{% for comment in comments %} 
-            	{% if message.id == comment.id %}
+	        
+            	{% if message.id == comment.commented_on.id %}
                 <ul>
-                	<h3>{{ comment.first_name }} {{ comment.last_name }} - {{comment.created_at }}</h3>
-                    <p>{{ comment.comment }}</p>
+
+                	<h3>{{ comment.comment_creator.first_name }} {{ comment.comment_creator.last_name }} wrote  - {{comment.created_at }}</h3>
+                    <p>{{ comment.comment_content }}</p>
+
                 </ul>
             	{% endif %}
         		{% endfor %}
+
+        		<form action="/makecomment/{{message.id}}" method="POST"> 
+        			{% csrf_token %}
+		
+	            	<p>write a message:</p>
+	           		<textarea name="add_comment"></textarea><br>
+	           		<input type="submit"  value="Post!">
+        		</form>
+
 
 
 	        {% endfor %}

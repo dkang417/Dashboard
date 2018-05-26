@@ -11,13 +11,16 @@ urlpatterns = [
     url(r'^users/new$', views.adduser),
     url(r'^createuser$', views.createuser),
     url(r'^users/edit/(?P<id>\d+)$', views.editid),
+    url(r'^users/edit$', views.editprofile),
     url(r'^updateid/(?P<id>\d+)$', views.updateid),
     url(r'^updatepassword/(?P<id>\d+)$', views.updatepassword),
     url(r'^deleteuser/(?P<id>\d+)$', views.deleteuser), 
     url(r'^removeuser/(?P<id>\d+)$', views.removeuser),
     url(r'^users/show/(?P<id>\d+)$', views.userinfo),
     url(r'^makemessage/(?P<id>\d+)$', views.makemessage),
-    url(r'^makecomment/(?P<id>\d+)$', views.makecomment),
+    url(r'^makecomment/(?P<message_id>\d+)$', views.makecomment),
+
+    # url(r'^users/show/(?P<id>\d+)$', views.userprofile)
    
   
 ]
