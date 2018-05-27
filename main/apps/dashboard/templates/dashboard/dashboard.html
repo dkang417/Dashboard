@@ -35,18 +35,24 @@
 	    	<th>Email</th> 
 	    	<th>Created_at</th>
 	    	<th>User_level</th>
-	    	<th>Actions</th>
+	    	{%if user.user_level == 9 %}<th>Actions</th>{%endif%}
 	  	</tr>
 
-	  	<tr>
+	  	
 	  		{% for person in users %}
+	  	<tr>
+	  	
 				<td> <a href="users/show/{{person.id}}">{{person.first_name}} {{person.last_name}}</a> </td>
 				<td>{{ person.email}} </td>
 				<td>{{ person.created_at  }} </td>
-		
-				<td>{{ person.user_level }} </td>
-				<td> <a href="users/edit/{{person.id}}">edit</a>  <a href="deleteuser/{{person.id}}">remove</a></td>
-
+				<td>{% if person.user_level == 9 %} Admin {%else%} Standard {%endif%}</td>
+				
+				{%if user.user_level == 9 %} 
+				<td>
+					<a href="users/edit/{{person.id}}">edit</a> | <a href="deleteuser/{{person.id}}">remove</a> 
+			
+				</td>
+				{%endif%}
 		</tr>	
 		{% endfor %}
 	</table>

@@ -68,7 +68,6 @@ class User(models.Model):
     objects = UserManager()
 
 
-
 class Message(models.Model): 
     message_content = models.TextField()
     message_creator = models.ForeignKey(User, related_name="createdmessages")

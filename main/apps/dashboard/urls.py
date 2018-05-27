@@ -21,9 +21,6 @@ urlpatterns = [
     url(r'^removeuser/(?P<id>\d+)$', views.removeuser),
     url(r'^users/show/(?P<id>\d+)$', views.userinfo),
     url(r'^makemessage/(?P<id>\d+)$', views.makemessage),
-    url(r'^makecomment/(?P<message_id>\d+)$', views.makecomment),
-
-    # url(r'^users/show/(?P<id>\d+)$', views.userprofile)
-   
-  
+    url(r'^makecomment/(?P<user_id>\d+)/(?P<message_id>\d+)$', views.makecomment),
+     
 ]

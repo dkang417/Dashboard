@@ -50,15 +50,13 @@
             	{% endif %}
         		{% endfor %}
 
-        		<form action="/makecomment/{{message.id}}" method="POST"> 
+        		<form action="/makecomment/{{user.id}}/{{message.id}}" method="POST"> 
         			{% csrf_token %}
 		
 	            	<p>write a message:</p>
 	           		<textarea name="add_comment"></textarea><br>
 	           		<input type="submit"  value="Post!">
         		</form>
-
-
 
 	        {% endfor %}
 			

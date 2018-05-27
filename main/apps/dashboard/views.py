@@ -5,7 +5,6 @@ from django.contrib import messages
 import bcrypt 
 from .models import *
 
-# Create your views here.
 
 def index(request):
 
@@ -17,7 +16,6 @@ def process(request):
 def register(request):
     User.objects.validate(request)
     return redirect("/")
-
 
 def login(request):
 	if request.method == "POST":
@@ -130,13 +128,12 @@ def makemessage(request, id):
 	Message.objects.create(message_content=message_content, message_creator= message_creator, message_for = user)
 	return redirect('/users/show/{}'.format(id))
 
-def makecomment(request,message_id):
+def makecomment(request,user_id,message_id):
 	message = Message.objects.get(id=message_id)
-	message_id = message_id
 	comment_creator = User.objects.get(id=request.session['id'])
 	comment_content = request.POST["add_comment"]
 	Comment.objects.create(comment_creator = comment_creator, comment_content= comment_content, commented_on = message)
-	return redirect('/dashboard')
+	return redirect('/users/show/{}'.format(user_id))
 
 def editprofile(request):
 	user = User.objects.get(id=request.session['id'])
@@ -172,6 +169,7 @@ def updatemypassword(request):
 	user.save()
 	messages.success(request," password successfully updated")
 	return redirect('/dashboard')
+
 def editdescription(request):
 	user = User.objects.get(id=request.session['id'])
 	description= request.POST["description"]
@@ -179,6 +177,4 @@ def editdescription(request):
 	user.description.save()
 	messages.success(request,"description successfully updated")
 	return redirect('/dashboard')
-
-
 

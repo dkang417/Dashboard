@@ -10,7 +10,7 @@
 		<div class="header">
 			<p>Test App</p>
 			<p><a href="/dashboard">Dashboard</a></p>
-			<p><a href="/">Profile</a></p>
+			<p><a href="/users/edit">Profile</a></p>
 			<p><a href="/logout">Log Off</a></p>
 		</div>
 
@@ -55,10 +55,10 @@
 
 		<div id="description">
 			<h3>Edit Description</h3>
-			<p>descript here</p>
+			
 			<form action="/editdescription" method="POST">
 			{% csrf_token %}
-			<label for ="description">desciption:</label> 
+			<label for ="description">Edit my desciption:</label> <br>
 				
 				<input type="textarea" name="description"> <br>
 				<input type="submit" value="Update Description">
