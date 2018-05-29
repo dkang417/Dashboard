@@ -1,45 +1,43 @@
+{% include "dashboard/helpers/head.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>New User</title>
-</head>
-<body>
-	<div id="wrapper">
-		<div class="header">
-			<p>Test App</p>
-			<p><a href="/dashboard">Dashboard</a></p>
-			<p><a href="/">Profile</a></p>
-			<p><a href="/logout">Log Off</a></p>
-		</div>
-		<div class="addnewuser">
+{% include "dashboard/helpers/loggednav.html" %}
 
-			<h1>Add a new user</h1>
-			
-			<form action="/createuser" method="POST">
-			{% csrf_token %}
-				<label for ="email">Email:</label> 
-				<input type="text" name="email"> <br>
+<div class="addnewuser">
 
-				<label for ="first_name">First Name:</label> 
-				<input type="text" name="first_name"><br>
-				
-				<label for ="last_name">Last Name:</label> 
-				<input type="text" name="last_name"><br>
-				
-				<label for ="password">Password:</label> 
-				<input type="password" name="password"> <br>
-				
-				<label for ="confirm_password">Confirm Password:</label>  
-				<input type="password" name="confirm_password"> <br>
+	<h1>Add a new user</h1>
+	
+	<form action="/createuser" method="POST">
+	{% csrf_token %}
+		<div class="form-group">
+	    	<label for="email">Email Address</label>
+	    	<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email" name="email">
 
-				<input type="submit" value="Create">
-			</form>
-			  
-		</div>
+	  	</div>
+
+		<div class="form-group">
+	    	<label for="first_name">First Name</label>
+	   		<input type="text" class="form-control" id="first_name" placeholder="First Name" name="first_name">
+	  	</div>	
+
+		<div class="form-group">
+	    	<label for="last_name">Last Name</label>
+	   		<input type="text" class="form-control" id="first_name" placeholder="Last Name" name="last_name">
+	  	</div>	
+
+	  	<div class="form-group">
+	    	<label for="password">Password</label>
+	    	<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+	  	</div>
+
+	  	<div class="form-group">
+	    	<label for="confirm_password">Confirm Password</label>
+	   		<input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" name="confirm_password">
+	  	</div>	
+
+	  	<button type="submit" class="btn btn-primary">Create</button>
+
+	</form>
+	  
+</div>
 		
-	</div>
-
-
-</body>
-</html>
+{% include "dashboard/helpers/footer.html" %}

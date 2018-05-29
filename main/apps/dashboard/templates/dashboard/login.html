@@ -1,46 +1,45 @@
+{% include "dashboard/helpers/head.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login </title>
-</head>
-<body>
-	<div id="wrapper">
-		<div class="header">
-			<p>Test App</p>
-			<p>Home</p>
-			<p><a href="/login">Sign In</a>
-		</div>
-		<div>
-			{% if messages %}
-				<ul class="messages">
-				    {% for message in messages %}
-				    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-				    {% endfor %}
-				</ul>
-			{% endif %}
-		</div>
+{% include "dashboard/helpers/nav.html" %}
+
+<div>
+	{% if messages %}
+		<ul class="messages">
+		    {% for message in messages %}
+		    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		    {% endfor %}
+		</ul>
+	{% endif %}
+</div>
+
+<div class="main">
+
+	<h1>Sign In</h1>
+	
+	<form action="/login" method="POST">
+		{% csrf_token %}
+
+	 	<div class="form-group">
+	    	<label for="email">Email Address</label>
+	    	<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email" name="email">
+
+	   		<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone.</small>
+	  	</div>
+
+	  	<div class="form-group">
+	    	<label for="password">Password</label>
+	    	<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+	  	</div>
+
+	  	<button type="submit" class="btn btn-primary">Sign In</button>
+	</form>
 
 
-		<div class="main">
-
-			<h1>Signin</h1>
-
-			<form action="/login" method="POST">
-				{% csrf_token %}
-				Email:
-				<input type="text" name="email"><br>
-
-				Password:
-				<input type="password" name="password"><br>
-				
-				
-				<input type="submit" name="Sign In">
-			</form>
-			<a href="/register">Don't Have an account? Register.</a>
-		</div>
-		
+	<div>
+		<a href="/register">Don't Have an account? Register.</a>
 	</div>
 
-</body>
-</html>
+</div>
+		
+
+{% include "dashboard/helpers/footer.html" %}

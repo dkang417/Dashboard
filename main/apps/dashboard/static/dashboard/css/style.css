@@ -1,0 +1,21 @@
+ul.messages {
+	list-style: none;
+}
+
+li.error {
+	color: red;
+}
+
+li.success {
+	color: green;
+}
+
+.newuser {
+	color: white;
+}
+
+button {
+	box-shadow: 3px 3px 3px black;
+	margin-bottom: 10px;
+}
+

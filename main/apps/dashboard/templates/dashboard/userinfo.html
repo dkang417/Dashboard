@@ -1,68 +1,64 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>User Information</title>
-</head>
-<body>
-	<div id="wrapper">
+{% include "dashboard/helpers/head.html" %}
+
+{% include "dashboard/helpers/loggednav.html" %}
+
+<div>
+	{% if messages %}
+		<ul class="messages">
+		    {% for message in messages %}
+		    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		    {% endfor %}
+		</ul>
+	{% endif %}
+</div>
+
+<div class="top">
+	<h1>{{ user.first_name}} {{ user.last_name }}</h1>
+	<p> Registered at: {{ user.created_at }}</p>
+	<p>User ID: #{{ user.id }} </p>
+	<p>Email address: {{ user.email }}</p>
+	<p>Description: {{user.description.description}}</p>
+</div>
+
+<div class="messages">
+<form action="/makemessage/{{user.id}}" method="POST"> 
+	{% csrf_token %}
+    <h5>Leave a message for {{user.first_name}}:</h5> 
+     <textarea name="add_message" class="form-control" id="description" rows="3"></textarea>
+
+   	<br>
+    <button type="submit" class="btn btn-primary">Post</button>
+</form>
+
+{% for message in message %}
+
+<p><a href="/users/show/{{message.message_creator.id}}"> {{ message.message_creator.first_name }} {{ message.message_creator.last_name }}</a>  wrote:   {{message.created_at }}</p>
+
+<p>{{message.message_content }}</p>
+
+	{% for comment in comments %} 
+
+	{% if message.id == comment.commented_on.id %}
+    <ul>
+
+    	<p><a href="/users/show/{{comment.comment_creator.id}}"> {{ comment.comment_creator.first_name }} {{ comment.comment_creator.last_name }} </a>   wrote  - {{comment.created_at }}</p>
+        <p>{{ comment.comment_content }}</p>
+
+    </ul>
+	{% endif %}
+	{% endfor %}
+
+	<form action="/makecomment/{{user.id}}/{{message.id}}" method="POST"> 
+		{% csrf_token %}
+
+    	<p>write a message:</p>
+    	<textarea name="add_comment" class="form-control" id="description" rows="2"></textarea>
+   		<br>
+   		<button type="submit" class="btn btn-primary">Post!</button>
+	</form>
+
+{% endfor %}
+
+</div>
 		
-
-		<div class="header">
-			<p>Test App</p>
-			<p><a href="/dashboard">Dashboard</a></p>
-			<p><a href="/users/edit">Profile</a></p>
-			<p><a href="/logout">Log Off</a></p>
-		</div>
-		<div class="top">
-			<h1>{{ user.first_name}} {{ user.last_name }}</h1>
-			<p> Registered at: {{ user.created_at }}</p>
-			<p>User ID: #{{ user.id }} </p>
-			<p>Email address: {{ user.email }}</p>
-			<p>Description: {{user.description.description}}</p>
-		</div>
-		<div class="messages">
-
-			<form action="/makemessage/{{user.id}}" method="POST"> 
-				{% csrf_token %}
-			
-	            <p>Leave a message for {{user.first_name}}:</p>
-	            
-	            <textarea name="add_message">
-	            </textarea> <br>
-	            <input type="submit" value="Post">
-	        </form>
-
-	        {% for message in messages %}
-
-	   
-	        <h3>{{ message.message_creator.first_name }} {{ message.message_creator.last_name }} wrote:   {{message.created_at }}</h3>
-			<p>{{message.message_content }}</p>
-
-	        	{% for comment in comments %} 
-	        
-            	{% if message.id == comment.commented_on.id %}
-                <ul>
-
-                	<h3>{{ comment.comment_creator.first_name }} {{ comment.comment_creator.last_name }} wrote  - {{comment.created_at }}</h3>
-                    <p>{{ comment.comment_content }}</p>
-
-                </ul>
-            	{% endif %}
-        		{% endfor %}
-
-        		<form action="/makecomment/{{user.id}}/{{message.id}}" method="POST"> 
-        			{% csrf_token %}
-		
-	            	<p>write a message:</p>
-	           		<textarea name="add_comment"></textarea><br>
-	           		<input type="submit"  value="Post!">
-        		</form>
-
-	        {% endfor %}
-			
-			</div>
-		
-	</div>
-
-</body>
-</html>
+{% include "dashboard/helpers/footer.html" %}

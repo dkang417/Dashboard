@@ -1,40 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>dashboard</title>
-</head>
-<body>
+{% include "dashboard/helpers/head.html" %}
 
-	<div id="wrapper">
-		<div>
-			{% if messages %}
-				<ul class="messages">
-				    {% for message in messages %}
-				    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-				    {% endfor %}
-				</ul>
-			{% endif %}
-		</div>
-		<div class="header">
-			<p>Test App</p>
-			<p><a href="/dashboard">Dashboard</a></p>
-			<p><a href="/users/edit">Profile</a></p>
-			<p><a href="/logout">Log Off</a></p>
-		</div>
-		
+{% include "dashboard/helpers/loggednav.html" %}
+
+<div id="wrapper">
+
+	<div>
+		{% if messages %}
+			<ul class="messages">
+			    {% for message in messages %}
+			    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+		{% endif %}
 	</div>
+
 	<div id="main">
 		<h2>Manage Users</h2>
-		<p><a href="users/new">Add New</a></p>		
+		<button class="btn btn-primary"><a class="newuser" href="users/new"> Add New</a></button>		
 	</div>
 
 
-	<table border=1 style="width:50%">
+	<table class="table table-striped">
 		<tr>
-	    	<th>Name</th>
-	    	<th>Email</th> 
-	    	<th>Created_at</th>
-	    	<th>User_level</th>
+	    	<th scope="col">Name</th>
+	    	<th scope="col">Email</th> 
+	    	<th scope="col">Created_at</th>
+	    	<th scope="col">User_level</th>
 	    	{%if user.user_level == 9 %}<th>Actions</th>{%endif%}
 	  	</tr>
 
@@ -42,7 +33,7 @@
 	  		{% for person in users %}
 	  	<tr>
 	  	
-				<td> <a href="users/show/{{person.id}}">{{person.first_name}} {{person.last_name}}</a> </td>
+				<th scope="row"> <a href="users/show/{{person.id}}">{{person.first_name}} {{person.last_name}}</a> </th>
 				<td>{{ person.email}} </td>
 				<td>{{ person.created_at  }} </td>
 				<td>{% if person.user_level == 9 %} Admin {%else%} Standard {%endif%}</td>
@@ -57,5 +48,5 @@
 		{% endfor %}
 	</table>
 
-</body>
-</html>
+
+{% include "dashboard/helpers/footer.html" %}

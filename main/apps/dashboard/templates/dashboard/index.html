@@ -2,50 +2,37 @@
 
 {% include "dashboard/helpers/nav.html" %}
 
-		<div class="jumbotron">
-		  <h1 class="display-4">Welcome to Dashboard!</h1>
-		  <p class="lead">I worked on a cool application using a MVC framework! </p>
-		  <hr class="my-4">
-		  <p>This application was built by David Kang!</p>
-		  <a class="btn btn-primary btn-lg" href="/process" role="button">START</a>
+<div class="jumbotron">
+  	<h1 class="display-4">Welcome to Dashboard!</h1>
+ 	<p class="lead">I worked on a cool application using a MVC framework! </p>
+  	<hr class="my-4">
+  	<p>This application was built by David Kang!</p>
+  	<a class="btn btn-primary btn-lg" href="/process" role="button">START</a>
+</div>
+<div>
+	{% if messages %}
+		<ul class="messages">
+		    {% for message in messages %}
+		    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		    {% endfor %}
+		</ul>
+	{% endif %}
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<h3>Manage Users</h3>
+			<p>Using this application, you'll learn how to add, remove, and edit users for the application.</p>
 		</div>
-		<div>
-			{% if messages %}
-				<ul class="messages">
-				    {% for message in messages %}
-				    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-				    {% endfor %}
-				</ul>
-			{% endif %}
+		<div class="col">
+			<h3>Leave messages</h3>
+			<p>Users will be able to leave a message to another user using this application.</p>
 		</div>
-		
-	<!-- 	<div class="welcome">
-			<h1>Welcome to the Test</h1>
-			<p>I worked on a cool application using a MVC framework! This application was built by me!</p>
-			<p><a href="/process">START</a></p>	
-		</div> -->
-
-
-		<div class="container">
-			<div class="row">
-				
-		
-				<div class="col">
-					<h3>Manage Users</h3>
-					<p>Using this application, you'll learn how to add, remove, and edit users for the application.</p>
-				</div>
-		
-
-				<div class="col">
-					<h3>Leave messages</h3>
-					<p>Users will be able to leave a message to another user using this application.</p>
-				</div>
-
-				<div class="col">
-					<h3>Edit User information</h3>
-					<p>Admins will be able to edit another user's information(email address, first name, last name, etc).</p>
-				</div>
-			</div>
-
+		<div class="col">
+			<h3>Edit User information</h3>
+			<p>Admins will be able to edit another user's information(email address, first name, last name, etc).</p>
 		</div>
+	</div>
+</div>
 {% include "dashboard/helpers/footer.html" %}

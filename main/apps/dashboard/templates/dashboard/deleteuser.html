@@ -1,26 +1,15 @@
+{% include "dashboard/helpers/head.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Delete</title>
-</head>
-<body>
-	<div id="wrapper">
-		<div class="header">
-			<p>Test App</p>
-			<p><a href="/dashboard">Dashboard</a></p>
-			<p><a href="/users/edit">Profile</a></p>
-			<p><a href="/logout">Log Off</a></p>
-		</div>
-		<div class="main">
-			<h1>Are you sure you want to delete User:{{user.name}}</h1>
-			<form action="/removeuser/{{user.id}}">
-				{% csrf_token %}
-				<input type="submit" value="yes">
-			</form>
-		</div>
-	</div>
+{% include "dashboard/helpers/loggednav.html" %}
 
+<div class="main">
+	<h2>Are you sure you want to delete User:{{user.name}}</h2>
 
-</body>
-</html>
+	<form action="/removeuser/{{user.id}}">
+		{% csrf_token %}
+		<button type="submit" class="btn btn-danger">Yes</button>
+	</form>
+	<p><a href="/dashboard">No, Go back to my dashboard</a></p>
+</div>
+
+{% include "dashboard/helpers/footer.html" %}

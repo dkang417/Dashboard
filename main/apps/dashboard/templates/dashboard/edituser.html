@@ -1,59 +1,79 @@
+{% include "dashboard/helpers/head.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Edit User</title>
-</head>
-<body>
-	<div id="wrapper">
+{% include "dashboard/helpers/loggednav.html" %}
 
-		<div class="header">
-			<p>Test App</p>
-			<p><a href="/dashboard">Dashboard</a></p>
-			<p><a href="/">Profile</a></p>
-			<p><a href="/logout">Log Off</a></p>
+<h1>Edit User #{{ user.id }}</h1>
+
+<div>
+	{% if messages %}
+		<ul class="messages">
+		    {% for message in messages %}
+		    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		    {% endfor %}
+		</ul>
+	{% endif %}
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<form action="/updateid/{{user.id}}" method="POST">
+				<h4>Edit information</h4>
+				{% csrf_token %}
+					<div class="form-group">
+				    	<label for="email">Email Address</label>
+				    	<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email" name="email" value="{{ user.email }}">
+
+				  	</div>
+
+					<div class="form-group">
+				    	<label for="first_name">First Name</label>
+				   		<input type="text" class="form-control" id="first_name" placeholder="First Name" name="first_name" value="{{ user.first_name }}">
+				  	</div>	
+
+					<div class="form-group">
+				    	<label for="last_name">Last Name</label>
+				   		<input type="text" class="form-control" id="first_name" placeholder="Last Name" name="last_name" value="{{ user.last_name }}">
+				  	</div>	
+
+					User Level: <br>
+					
+					<div class="form-group">
+				    	<select name="user_level" class="form-control">
+						<option value=1>normal</option>
+						<option value=9>admin</option>
+					</select>
+				   		
+				  	</div>
+
+				
+					<br>
+					<button type="submit" class="btn btn-primary">Save</button>
+						
+			</form>
 		</div>
 
-		<h1>Edit User #{{ user.id }}</h1>
-		<h3>Edit information</h3>
-		<form action="/updateid/{{user.id}}" method="POST">
-			{% csrf_token %}
-				<label for ="email">Email:</label> 
-				<input type="text" name="email" value="{{user.email}}"> <br>
+		<div class="col">
+			
+			<form action="/updatepassword/{{user.id}}" method="POST">
+				<h4>Change password</h4>
+				{% csrf_token %}
+				<div class="form-group">
+			    	<label for="password">Password</label>
+			    	<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+			  	</div>
 
-				<label for ="first_name">First Name:</label> 
-				<input type="text" name="first_name" value="{{user.first_name}}"><br>
-				
-				<label for ="last_name">Last Name:</label> 
-				<input type="text" name="last_name" value="{{user.last_name}}"><br>
+			  	<div class="form-group">
+			    	<label for="confirm_password">Confirm Password</label>
+			   		<input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" name="confirm_password">
+			  	</div>	
 
-				User Level: <br>
-				
-				<select name="user_level">
-					<option value=1>normal</option>
-					<option value=9>admin</option>
-				</select>
-				<br>
-				<input type="submit" value="save">
-				<br>
-				
-				
-				
-		</form>
-		<h3>Change password</h3>
-		<form action="/updatepassword/{{user.id}}" method="POST">
-			{% csrf_token %}
-			<label for ="password">Password:</label> 
-				<input type="password" name="password"> <br>
-				
-				<label for ="confirm_password">Confirm Password:</label>  
-				<input type="password" name="confirm_password"> <br>
-				<input type="submit" value="Update Password">
-		</form>
-		</form>
+			  	<button type="submit" class="btn btn-primary">Update Password</button>
 
-
+			</form>
+		</div>
+		
 	</div>
+</div>
 
-</body>
-</html>
+{% include "dashboard/helpers/footer.html" %}
