@@ -9,15 +9,7 @@
   	<p>This application was built by David Kang!</p>
   	<a class="btn btn-primary btn-lg" href="/process" role="button">START</a>
 </div>
-<div>
-	{% if messages %}
-		<ul class="messages">
-		    {% for message in messages %}
-		    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-		    {% endfor %}
-		</ul>
-	{% endif %}
-</div>
+{% include "dashboard/helpers/messages.html" %}
 
 <div class="container">
 	<div class="row">

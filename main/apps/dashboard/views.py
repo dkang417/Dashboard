@@ -123,4 +123,3 @@ def updatemypassword(request):
 def editdescription(request):
 	User.objects.validateDescription(request)
 	return redirect('/users/edit')
-
